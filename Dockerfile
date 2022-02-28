@@ -4,7 +4,6 @@ FROM nodered/node-red
 # of your added nodes modules for Node-RED
 COPY package.json .
 RUN npm install --unsafe-perm --no-update-notifier --no-fund --only=production
-RUN echo $KEY >> /data/jwtRS256.key
 
 # Copy _your_ Node-RED project files into place
 # NOTE: This will only work if you DO NOT later mount /data as an external volume.
@@ -13,8 +12,8 @@ RUN echo $KEY >> /data/jwtRS256.key
 COPY --chown=node-red settings.js /data/settings.js
 COPY flows_cred.json /data/flows_cred.json
 COPY flows.json /data/flows.json
-#COPY --chown=node-red --chmod=777 jwtscript /data/jwtscript
-#ENTRYPOINT /data/jwtscript
+COPY --chown=node-red --chmod=777 entrypoint.sh /data/entrypoint.sh
+ENTRYPOINT /data/entrypoint.sh
 
 
 # You should add extra nodes via your package.json file but you can also add them here:
