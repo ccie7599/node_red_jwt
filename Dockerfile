@@ -12,8 +12,8 @@ RUN npm install --unsafe-perm --no-update-notifier --no-fund --only=production
 COPY --chown=node-red settings.js /data/settings.js
 COPY flows_cred.json /data/flows_cred.json
 COPY flows.json /data/flows.json
-COPY --chown=node-red --chmod=777 entrypoint.sh /data/entrypoint.sh
-ENTRYPOINT /data/entrypoint.sh
+COPY --chown=node-red --chmod=777 entrypoint /data/entrypoint
+ENTRYPOINT /data/entrypoint
 
 
 # You should add extra nodes via your package.json file but you can also add them here:
